@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CotizAlonso - Formulario de Cotización</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-header {
+            font-weight: 600;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                min-height: auto;
+            }
+            .main {
+                padding-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img style="height: 40px; margin-left: 20px; max-width: 220px;" src="./alonso-logo.png" alt="">
+            </a>
+            <button class="navbar-toggler" style="width: 40px; padding: 0;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex ms-auto me-3">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+                        <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" id="notificacion_bell" href="#">
+                            <i class="fa-solid fa-bell">
+                                <span class="translate-middle badge rounded-pill bg-warning text-dark">3</span>
+                            </i>
+                           
+                        </a>
+                        <!-- Contenedor de notificaciones -->
+                        <div id="notification-dropdown" class="notification-dropdown">
+                          <div class="notification-header d-flex justify-content-between align-items-center p-2 border-bottom">
+                              <h6 class="mb-0">Notificaciones</h6>
+                              <small><a href="#" id="mark-all-read">Marcar todas como leídas</a></small>
+                          </div>
+                          <div id="notification-list" class="notification-list">
+                              <!-- Las notificaciones se insertarán aquí dinámicamente -->
+                              <div class="notification-item unread">
+                                  <div class="d-flex">
+                                      <div class="flex-shrink-0 me-3">
+                                          <i class="fa-solid fa-file-invoice text-primary"></i>
+                                      </div>
+                                      <div class="flex-grow-1">
+                                          <div class="notification-title">Nueva cotización</div>
+                                          <div class="notification-message">La cotización ALO-186-4-2025 ha sido creada. Por favor revisar para aprobar o modificar.</div>
+                                          <div class="notification-time">12:42 PM el 30/04/2025</div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <!-- Más notificaciones... -->
+                          </div>
+                          <div class="notification-footer text-center p-2 border-top">
+                              <a href="#" class="text-decoration-none">Ver todas las notificaciones</a>
+                          </div>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-user"></i> Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ajustes.html"><i class="fa-solid fa-gear"></i> Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div id="sidebar" class="sidebar col-2">
+                <div class="d-flex flex-column flex-shrink-0">
+                    <button id="sidebarToggle" class="btn m-auto">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                                <i class="fa-solid fa-gauge me-2"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_pendientes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Cotizaciones pendientes">
+                                <div>
+                                    <i class="fa-solid fa-inbox me-2"></i> 
+                                    <span>Cotizaciones pendientes</span>                                    
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_enviadas.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Enviadas">
+                                <div><i class="fa-solid fa-paper-plane me-2"></i> 
+                                    <span>Enviadas</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_errores.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Con Errores">
+                                <div><i class="fa-solid fa-circle-exclamation me-2"></i> 
+                                    <span>Con Errores</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="text-dark" style="margin:0;">
+                    <ul class="nav nav-pills flex-column mb-auto ">
+                        
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Clientes">
+                                <i class="fa-solid fa-users me-2"></i> <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Productos">
+                                <i class="fa-solid fa-cube me-2"></i> <span>Productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="plantillas.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Plantillas">
+                                <i class="fa-solid fa-copy me-2"></i> <span>Plantillas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="formulario.html" class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="right" title="Formulario">
+                                <i class="fa-solid fa-pen-to-square me-2"></i> <span>Formulario</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="text-dark" style="margin:0;">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Reportes">
+                                <i class="fa-solid fa-chart-line me-2"></i> <span>Reportes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configia.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Config. IA">
+                                <i class="fa-solid fa-robot me-2"></i> <span>Config. IA</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="ajustes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Ajustes">
+                                <i class="fa-solid fa-gears me-2"></i> <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main col">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h1><i class="fa-solid fa-file-signature me-2"></i> Nueva Solicitud de Cotización</h1>
+                        <p class="text-muted">Complete todos los campos requeridos (*) para generar su proforma</p>
+                        <hr>
+                    </div>
+                </div>
+            
+                <form class="needs-validation" novalidate>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs mb-4" id="transportTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="aereo-solo-tab" data-bs-toggle="tab" data-bs-target="#aereo-solo" type="button" role="tab">Aéreo Solo Transporte</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="aereo-aduana-tab" data-bs-toggle="tab" data-bs-target="#aereo-aduana" type="button" role="tab">Aéreo con Aduanas</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="lcl-solo-tab" data-bs-toggle="tab" data-bs-target="#lcl-solo" type="button" role="tab">LCL Solo Transporte</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="lcl-aduana-tab" data-bs-toggle="tab" data-bs-target="#lcl-aduana" type="button" role="tab">LCL con Aduanas</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="fcl-solo-tab" data-bs-toggle="tab" data-bs-target="#fcl-solo" type="button" role="tab">FCL Solo Transporte</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="fcl-aduana-tab" data-bs-toggle="tab" data-bs-target="#fcl-aduana" type="button" role="tab">FCL con Aduanas</button>
+                    </li>
+                  </ul>
+                
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <!-- Aéreo Solo Transporte -->
+                    <div class="tab-pane active" id="aereo-solo" role="tabpanel" aria-labelledby="aereo-solo-tab">
+                      <h4 class="mb-4">Aéreo Solo Transporte</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="aereoSoloOrigen" class="form-label">Origen (Dirección Completa) o Aeropuerto salida</label>
+                          <input type="text" class="form-control" id="aereoSoloOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoSoloDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="aereoSoloDestino" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="aereoSoloCantidad" class="form-label">Cantidad de Pallets o paquetes</label>
+                          <input type="number" class="form-control" id="aereoSoloCantidad" required>
+                        </div>
+                        <div class="col-md-8">
+                          <label class="form-label">Dimensiones</label>
+                          <div class="row g-2">
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Largo (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Ancho (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Alto (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control" id="aereoSoloVolumen" placeholder="m³" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="aereoSoloPeso" class="form-label">Peso (kg)</label>
+                          <input type="number" class="form-control" id="aereoSoloPeso" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoSoloComodity" class="form-label">Comodity</label>
+                          <input type="text" class="form-control" id="aereoSoloComodity" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoSoloRemontable" class="form-label">Remontable</label>
+                          <select class="form-select" id="aereoSoloRemontable" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- Aéreo con Aduanas -->
+                    <div class="tab-pane" id="aereo-aduana" role="tabpanel" aria-labelledby="aereo-aduana-tab">
+                      <h4 class="mb-4">Aéreo con Aduanas</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="aereoAduanaOrigen" class="form-label">Origen (Dirección Completa) o Aeropuerto salida</label>
+                          <input type="text" class="form-control" id="aereoAduanaOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoAduanaDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="aereoAduanaDestino" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="aereoAduanaCantidad" class="form-label">Cantidad de Pallets o paquetes</label>
+                          <input type="number" class="form-control" id="aereoAduanaCantidad" required>
+                        </div>
+                        <div class="col-md-8">
+                          <label class="form-label">Dimensiones</label>
+                          <div class="row g-2">
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Largo (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Ancho (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Alto (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control" id="aereoAduanaVolumen" placeholder="m³" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="aereoAduanaPeso" class="form-label">Peso (kg)</label>
+                          <input type="number" class="form-control" id="aereoAduanaPeso" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoAduanaComodity" class="form-label">Comodity</label>
+                          <input type="text" class="form-control" id="aereoAduanaComodity" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoAduanaValor" class="form-label">Valor de la carga</label>
+                          <input type="number" class="form-control" id="aereoAduanaValor" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoAduanaPermiso" class="form-label">Requiere permiso?</label>
+                          <select class="form-select" id="aereoAduanaPermiso" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="aereoAduanaRemontable" class="form-label">Remontable</label>
+                          <select class="form-select" id="aereoAduanaRemontable" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- LCL Solo Transporte -->
+                    <div class="tab-pane" id="lcl-solo" role="tabpanel" aria-labelledby="lcl-solo-tab">
+                      <h4 class="mb-4">LCL Solo Transporte</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="lclSoloOrigen" class="form-label">Origen (Dirección Completa) o Puerto salida</label>
+                          <input type="text" class="form-control" id="lclSoloOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclSoloDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="lclSoloDestino" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="lclSoloCantidad" class="form-label">Cantidad de Pallets o paquetes</label>
+                          <input type="number" class="form-control" id="lclSoloCantidad" required>
+                        </div>
+                        <div class="col-md-8">
+                          <label class="form-label">Dimensiones</label>
+                          <div class="row g-2">
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Largo (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Ancho (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Alto (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control" id="lclSoloVolumen" placeholder="m³" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="lclSoloPeso" class="form-label">Peso (kg)</label>
+                          <input type="number" class="form-control" id="lclSoloPeso" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclSoloComodity" class="form-label">Comodity</label>
+                          <input type="text" class="form-control" id="lclSoloComodity" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclSoloRemontable" class="form-label">Remontable</label>
+                          <select class="form-select" id="lclSoloRemontable" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- LCL con Aduanas -->
+                    <div class="tab-pane" id="lcl-aduana" role="tabpanel" aria-labelledby="lcl-aduana-tab">
+                      <h4 class="mb-4">LCL con Aduanas</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="lclAduanaOrigen" class="form-label">Origen (Dirección Completa) o Puerto salida</label>
+                          <input type="text" class="form-control" id="lclAduanaOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclAduanaDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="lclAduanaDestino" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="lclAduanaCantidad" class="form-label">Cantidad de Pallets o paquetes</label>
+                          <input type="number" class="form-control" id="lclAduanaCantidad" required>
+                        </div>
+                        <div class="col-md-8">
+                          <label class="form-label">Dimensiones</label>
+                          <div class="row g-2">
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Largo (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Ancho (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control dimension-input" placeholder="Alto (cm)" required>
+                            </div>
+                            <div class="col-3">
+                              <input type="number" class="form-control" id="lclAduanaVolumen" placeholder="m³" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="lclAduanaPeso" class="form-label">Peso (kg)</label>
+                          <input type="number" class="form-control" id="lclAduanaPeso" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclAduanaComodity" class="form-label">Comodity</label>
+                          <input type="text" class="form-control" id="lclAduanaComodity" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclAduanaValor" class="form-label">Valor de la carga</label>
+                          <input type="number" class="form-control" id="lclAduanaValor" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclAduanaPermiso" class="form-label">Requiere permiso?</label>
+                          <select class="form-select" id="lclAduanaPermiso" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="lclAduanaRemontable" class="form-label">Remontable</label>
+                          <select class="form-select" id="lclAduanaRemontable" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- FCL Solo Transporte -->
+                    <div class="tab-pane" id="fcl-solo" role="tabpanel" aria-labelledby="fcl-solo-tab">
+                      <h4 class="mb-4">FCL Solo Transporte</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="fclSoloOrigen" class="form-label">Origen (Dirección Completa) o Puerto salida</label>
+                          <input type="text" class="form-control" id="fclSoloOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclSoloDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="fclSoloDestino" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclSoloTipoContenedor" class="form-label">Tipo contenedor</label>
+                          <select class="form-select" id="fclSoloTipoContenedor" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="20">20' Standard</option>
+                            <option value="40">40' Standard</option>
+                            <option value="40hc">40' High Cube</option>
+                            <option value="45hc">45' High Cube</option>
+                            <option value="20rf">20' Reefer</option>
+                            <option value="40rf">40' Reefer</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclSoloCommodity" class="form-label">Commodity</label>
+                          <input type="text" class="form-control" id="fclSoloCommodity" required>
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- FCL con Aduanas -->
+                    <div class="tab-pane" id="fcl-aduana" role="tabpanel" aria-labelledby="fcl-aduana-tab">
+                      <h4 class="mb-4">FCL con Aduanas</h4>
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label for="fclAduanaOrigen" class="form-label">Origen (Dirección Completa) o Puerto salida</label>
+                          <input type="text" class="form-control" id="fclAduanaOrigen" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclAduanaDestino" class="form-label">Destino</label>
+                          <input type="text" class="form-control" id="fclAduanaDestino" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclAduanaTipoContenedor" class="form-label">Tipo contenedor</label>
+                          <select class="form-select" id="fclAduanaTipoContenedor" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="20">20' Standard</option>
+                            <option value="40">40' Standard</option>
+                            <option value="40hc">40' High Cube</option>
+                            <option value="45hc">45' High Cube</option>
+                            <option value="20rf">20' Reefer</option>
+                            <option value="40rf">40' Reefer</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="fclAduanaCommodity" class="form-label">Commodity</label>
+                          <input type="text" class="form-control" id="fclAduanaCommodity" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="fclAduanaValor" class="form-label">Valor de la carga</label>
+                          <input type="number" class="form-control" id="fclAduanaValor" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="fclAduanaAnticipado" class="form-label">Anticipado</label>
+                          <select class="form-select" id="fclAduanaAnticipado" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="fclAduanaRedestino" class="form-label">Redestino</label>
+                          <select class="form-select" id="fclAduanaRedestino" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <label for="fclAduanaPermisos" class="form-label">Permisos</label>
+                          <select class="form-select" id="fclAduanaPermisos" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <hr class="my-4">
+                
+                  <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Validación de formulario
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const dimensionInputs = document.querySelectorAll('.dimension-input');
+          dimensionInputs.forEach(input => {
+            input.addEventListener('input', function() {
+              const dimensionsGroup = this.closest('.row');
+              const inputs = dimensionsGroup.querySelectorAll('.dimension-input');
+              const volumenInput = dimensionsGroup.parentElement.nextElementSibling.querySelector('input[placeholder="m³"]') || 
+                                  dimensionsGroup.parentElement.parentElement.querySelector('input[placeholder="m³"]');
+              
+              if(inputs[0].value && inputs[1].value && inputs[2].value) {
+                const largo = parseFloat(inputs[0].value) / 100; // Convertir cm a m
+                const ancho = parseFloat(inputs[1].value) / 100;
+                const alto = parseFloat(inputs[2].value) / 100;
+                const volumen = (largo * ancho * alto).toFixed(3);
+                
+                if(volumenInput) {
+                  volumenInput.value = volumen;
+                }
+              } else {
+                if(volumenInput) volumenInput.value = '';
+              }
+            });
+          });
+        });
+    </script>
+</body>
+</html>

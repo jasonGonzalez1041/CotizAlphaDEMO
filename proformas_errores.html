@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CotizAlonso - Cotizaciones con Errores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img style="height: 40px; margin-left: 20px; max-width: 220px;" src="./alonso-logo.png" alt="">
+            </a>
+            <button class="navbar-toggler" style="width: 40px; padding: 0;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex ms-auto me-3">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+                        <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" id="notificacion_bell" href="#">
+                            <i class="fa-solid fa-bell">
+                                <span class="translate-middle badge rounded-pill bg-warning text-dark">3</span>
+                            </i>
+                           
+                        </a>
+                        <!-- Contenedor de notificaciones -->
+                        <div id="notification-dropdown" class="notification-dropdown">
+                            <div class="notification-header d-flex justify-content-between align-items-center p-2 border-bottom">
+                                <h6 class="mb-0">Notificaciones</h6>
+                                <small><a href="#" id="mark-all-read">Marcar todas como leídas</a></small>
+                            </div>
+                            <div id="notification-list" class="notification-list">
+                                <!-- Las notificaciones se insertarán aquí dinámicamente -->
+                                <div class="notification-item unread">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <i class="fa-solid fa-file-invoice text-primary"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="notification-title">Nueva cotización</div>
+                                            <div class="notification-message">La cotización ALO-186-4-2025 ha sido creada. Por favor revisar para aprobar o modificar.</div>
+                                            <div class="notification-time">12:42 PM el 30/04/2025</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Más notificaciones... -->
+                            </div>
+                            <div class="notification-footer text-center p-2 border-top">
+                                <a href="#" class="text-decoration-none">Ver todas las notificaciones</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-user"></i> Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ajustes.html"><i class="fa-solid fa-gear"></i> Configuración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div id="sidebar" class="sidebar col-2">
+                <div class="d-flex flex-column flex-shrink-0">
+                    <button id="sidebarToggle" class="btn m-auto">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
+                                <i class="fa-solid fa-gauge me-2"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_pendientes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Cotizaciones Pendientes">
+                                <div>
+                                    <i class="fa-solid fa-inbox me-2"></i> 
+                                    <span>Cotizaciones Pendientes</span>                                    
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_enviadas.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Enviadas">
+                                <div><i class="fa-solid fa-paper-plane me-2"></i> 
+                                    <span>Enviadas</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="proformas_errores.html" class="nav-link active" data-bs-toggle="tooltip" data-bs-placement="right" title="Con Errores">
+                                <div><i class="fa-solid fa-circle-exclamation me-2"></i> 
+                                    <span>Con Errores</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="text-dark" style="margin:0;">
+                    <ul class="nav nav-pills flex-column mb-auto ">
+                        
+                        <li class="nav-item">
+                            <a href="clientes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Clientes">
+                                <i class="fa-solid fa-users me-2"></i> <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="productos.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Productos">
+                                <i class="fa-solid fa-cube me-2"></i> <span>Productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="plantillas.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Plantillas">
+                                <i class="fa-solid fa-copy me-2"></i> <span>Plantillas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="formulario.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Formulario">
+                                <i class="fa-solid fa-pen-to-square me-2"></i> <span>Formulario</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="text-dark" style="margin:0;">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="reportes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Reportes">
+                                <i class="fa-solid fa-chart-line me-2"></i> <span>Reportes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="configia.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Config. IA">
+                                <i class="fa-solid fa-robot me-2"></i> <span>Config. IA</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="ajustes.html" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="right" title="Ajustes">
+                                <i class="fa-solid fa-gears me-2"></i> <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main col">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h1><i class="fa-solid fa-circle-exclamation me-2"></i> Cotizaciones con Errores</h1>
+                        <p class="text-muted">Listado de Cotizaciones que presentaron errores al procesarse</p>
+                    </div>
+                </div>
+
+                <!-- Filtros y búsqueda -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <form class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="fechaDesde" class="form-label">Desde</label>
+                                        <input type="date" class="form-control" id="fechaDesde">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="fechaHasta" class="form-label">Hasta</label>
+                                        <input type="date" class="form-control" id="fechaHasta">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="cliente" class="form-label">Cliente</label>
+                                        <select class="form-select" id="cliente">
+                                            <option selected>Todos</option>
+                                            <option>DICOMA S.A.</option>
+                                            <option>Transportes Rápidos</option>
+                                            <option>Carga Segura</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="tipoError" class="form-label">Tipo de Error</label>
+                                        <select class="form-select" id="tipoError">
+                                            <option selected>Todos</option>
+                                            <option>Validación</option>
+                                            <option>Formato</option>
+                                            <option>Datos faltantes</option>
+                                            <option>Sistema</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                        <button type="button" class="btn btn-outline-secondary me-2">
+                                            <i class="fa-solid fa-rotate-right"></i> Reiniciar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa-solid fa-filter"></i> Filtrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listado de Cotizaciones con errores -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">2 Cotizaciones con Errores</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="fa-solid fa-file-export"></i> Exportar
+                                    </button>
+                                    <button class="btn btn-sm btn-primary">
+                                        <i class="fa-solid fa-plus"></i> Nueva Cotización
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>ID Cotización</th>
+                                                <th>Cliente</th>
+                                                <th>Tipo</th>
+                                                <th>Fecha Error</th>
+                                                <th>Tipo Error</th>
+                                                <th>Intento</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#ALO 180-04-2025</td>
+                                                <td>Transportes Rápidos</td>
+                                                <td><span class="badge bg-primary">FCL</span></td>
+                                                <td>19/04/2025 14:22</td>
+                                                <td><span class="badge bg-danger">Validación</span></td>
+                                                <td>3° intento</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning" title="Reintentar">
+                                                        <i class="fa-solid fa-rotate"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-secondary" title="Editar">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#ALO 179-04-2025</td>
+                                                <td>Carga Segura</td>
+                                                <td><span class="badge bg-success">LCL</span></td>
+                                                <td>18/04/2025 09:15</td>
+                                                <td><span class="badge bg-warning text-dark">Datos faltantes</span></td>
+                                                <td>1° intento</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning" title="Reintentar">
+                                                        <i class="fa-solid fa-rotate"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-secondary" title="Editar">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Siguiente</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalle de errores -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0"><i class="fa-solid fa-bug me-2"></i> Detalle de Errores</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="alert alert-danger">
+                                            <h5 class="alert-heading">#ALO 180-04-2025 - Error de Validación</h5>
+                                            <hr>
+                                            <p><strong>Fecha:</strong> 19/04/2025 14:22</p>
+                                            <p><strong>Cliente:</strong> Transportes Rápidos</p>
+                                            <p><strong>Descripción:</strong></p>
+                                            <ul>
+                                                <li>Faltan datos de contacto del cliente</li>
+                                                <li>El campo "Tipo de Contenedor" no coincide con la ruta seleccionada</li>
+                                                <li>El peso total excede el límite permitido para esta ruta</li>
+                                            </ul>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-sm btn-outline-danger me-2">
+                                                    <i class="fa-solid fa-file-alt me-1"></i> Ver log completo
+                                                </button>
+                                                <button class="btn btn-sm btn-warning">
+                                                    <i class="fa-solid fa-rotate me-1"></i> Reintentar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="alert alert-warning">
+                                            <h5 class="alert-heading">#ALO 179-04-2025 - Datos Faltantes</h5>
+                                            <hr>
+                                            <p><strong>Fecha:</strong> 18/04/2025 09:15</p>
+                                            <p><strong>Cliente:</strong> Carga Segura</p>
+                                            <p><strong>Descripción:</strong></p>
+                                            <ul>
+                                                <li>Faltan dimensiones para 3 ítems de la carga</li>
+                                                <li>La dirección de entrega no tiene código postal</li>
+                                            </ul>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn btn-sm btn-outline-warning me-2">
+                                                    <i class="fa-solid fa-file-alt me-1"></i> Ver log completo
+                                                </button>
+                                                <button class="btn btn-sm btn-warning">
+                                                    <i class="fa-solid fa-rotate me-1"></i> Reintentar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
