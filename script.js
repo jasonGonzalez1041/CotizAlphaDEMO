@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 1,
       title: "Nueva cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-186-4-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-186-4-2025", // Modificado
       time: "12:42 PM el 30/04/2025",
       read: false,
       type: "new",
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 2,
       title: "Nueva cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-185-4-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-185-4-2025", // Modificado
       time: "11:25 AM el 30/04/2025",
       read: false,
       type: "new",
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 3,
       title: "Error en cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-184-4-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-184-4-2025", // Modificado
       time: "10:56 AM el 30/04/2025",
       read: false,
       type: "error",
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 4,
       title: "Nueva cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-183-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-183-2025", // Modificado
       time: "12:42 PM el 30/04/2025",
       read: false,
       type: "new",
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 5,
       title: "Nueva cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-182-4-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-182-4-2025", // Modificado
       time: "11:25 AM el 30/04/2025",
       read: false,
       type: "new",
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       id: 6,
       title: "Error en cotización",
-      message: "Julieta dar seguimiento a la cotización ALO-181-4-2025", // Modificado
+      message: "Julieta dar seguimiento a la cotización ALP-181-4-2025", // Modificado
       time: "10:56 AM el 30/04/2025",
       read: false,
       type: "error",
